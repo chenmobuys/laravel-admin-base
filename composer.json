@@ -13,5 +13,13 @@
         "php":" >=7.0.0",
         "laravel/framework": "5.5.*",
         "encore/laravel-admin": "1.5.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Encore\\Admin\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     }
 }

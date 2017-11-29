@@ -1,7 +1,8 @@
 {
     "name": "chenmobuys/laravel-admin-base",
     "description": "laravel-admin-base base on laravel",
-    "type": "project",
+    "type": "library",
+    "license": "MIT",
     "authors": [
         {
             "name": "Chenmobuys",

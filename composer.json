@@ -1,0 +1,14 @@
+{
+    "name": "chenmobuys/laravel-admin-base",
+    "description": "laravel-admin-base base on laravel",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Chenmobuys",
+            "email": "chenmobuys@gmail.com"
+        }
+    ],
+    "require": {
+        "encore/laravel-admin": "1.5.*"
+    }
+}

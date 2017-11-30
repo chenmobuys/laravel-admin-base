@@ -19,6 +19,10 @@ class AdminBaseServiceProvider extends ServiceProvider
         if (file_exists($routes = __DIR__.'/routes.php')) {
             $this->loadRoutesFrom($routes);
         }
+
+        if ($this->app->runningInConsole()) {
+            $this->publishes([__DIR__.'/Database/migrations' => database_path('migrations')], 'laravel-admin-migrations');
+        }
     }
 
     public function register()

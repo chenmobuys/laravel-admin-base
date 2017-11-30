@@ -16,7 +16,9 @@ class AdminBaseServiceProvider extends ServiceProvider
 
     public function boot()
     {
-
+        if (file_exists($routes = __DIR__.'/routes.php')) {
+            $this->loadRoutesFrom($routes);
+        }
     }
 
     public function register()

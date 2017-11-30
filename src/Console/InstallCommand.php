@@ -1,6 +1,6 @@
 <?php
 
-namespace Encore\AdminBase\Console;
+namespace Chenmobuys\AdminBase\Console;
 
 use Illuminate\Console\Command;
 

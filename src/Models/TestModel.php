@@ -6,7 +6,7 @@
  * Time: 下午11:28
  */
 
-namespace Chenmobuys\Models;
+namespace Chenmobuys\AdminBase\Models;
 
 
 use Illuminate\Database\Eloquent\Model;

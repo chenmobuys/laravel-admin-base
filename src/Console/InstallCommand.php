@@ -38,7 +38,8 @@ class InstallCommand extends Command
         $this->call('vendor:publish',['--provider'=>'Chenmobuys\AdminBase\AdminBaseServiceProvider']);
         $this->call('migrate:fresh');
         $this->call('admin:install');
-        $this->call('db:seed');
+
+        $this->call('db:seed', ['--class' => 'Chenmobuys\AdminBase\Database\seeds\DatabaseSeeder']);
     }
 
 

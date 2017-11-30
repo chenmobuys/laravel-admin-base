@@ -22,6 +22,7 @@ class AdminBaseServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->publishes([__DIR__.'/Database/migrations' => database_path('migrations')], 'laravel-admin-migrations');
+            $this->publishes([__DIR__.'/Database/factories' => database_path('factories')], 'laravel-admin-factories');
         }
     }
 

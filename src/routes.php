@@ -7,6 +7,14 @@ Route::group([
     'middleware'    => config('admin.route.middleware'),
 ], function (Router $router) {
 
-    Route::resource('test/index', 'TestController');
+    //Goods Module
+    $router->resource('goods/goods', 'Goods\GoodsController');
+    $router->resource('goods/goods_category', 'Goods\GoodsCategoryController');
+    $router->resource('goods/goods_brand', 'Goods\GoodsBrandController');
+    $router->resource('goods/goods_type', 'Goods\GoodsTypeController');
+    $router->resource('goods/goods_attribute', 'Goods\GoodsAttributeController');
+
+    //Order Module
+    $router->resource('order/order','Order\OrderController');
 
 });

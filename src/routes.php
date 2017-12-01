@@ -3,12 +3,10 @@ use Illuminate\Routing\Router;
 
 Route::group([
     'prefix'        => config('admin.route.prefix'),
-    'namespace'     => config('admin.route.namespace'),
+    'namespace'     => 'Chenmobuys\AdminBase\Controllers',
     'middleware'    => config('admin.route.middleware'),
 ], function (Router $router) {
 
-    $router->get('/test', function(){
-        return 1;
-    });
+    Route::resource('test/index', 'TestController');
 
 });

@@ -2,7 +2,7 @@
 
 namespace Chenmobuys\AdminBase\Controllers;
 
-use Chenmobuys\Models\TestModel;
+use Chenmobuys\AdminBase\Models\TestModel;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Facades\Admin;

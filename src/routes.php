@@ -7,6 +7,10 @@ Route::group([
     'middleware'    => config('admin.route.middleware'),
 ], function (Router $router) {
 
+    $router->get('helpers/routes', 'Helper\RouteController@index');
+
+    $router->resource('auth/logs', 'Auth\LogController', ['only' => ['index', 'destroy']]);
+
     //Goods Module
     $router->resource('goods/goods', 'Goods\GoodsController');
     $router->resource('goods/goods_category', 'Goods\GoodsCategoryController');

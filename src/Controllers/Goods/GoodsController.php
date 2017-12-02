@@ -130,8 +130,8 @@ class GoodsController extends Controller
 //                $form->select('goods_type','商品类型')->options(GoodsType::all()->pluck('type_name','id'))
 //                    ->load('goods_attrs',env('API_DOMAIN').'/api/goods_attrs');
 
-                $form->selectOnChange('goods_attr_items')->options(GoodsType::all()->pluck('type_name','id'))
-                    ->loadOnChange('goods_attr_items',env('API_DOMAIN').':8080'.'/api/goods_attrs');
+                //$form->selectOnChange('goods_attr_items')->options(GoodsType::all()->pluck('type_name','id'))
+                   // ->loadOnChange('goods_attr_items',env('API_DOMAIN').':8080'.'/api/goods_attrs');
                 //$form->multipleSelect('goods_attr_items')->options(GoodsType::all()->pluck('type_name','id'));
             });
 

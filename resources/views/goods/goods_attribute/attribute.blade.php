@@ -20,9 +20,7 @@
 
                     </select>
                 @elseif($attribute['attr_input_type'] == 3)
-                    <textarea name="goods_attr_items[{{$k}}][attr_value]" class="form-control">
-                        {{$attribute['value']}}
-                    </textarea>
+                    <textarea name="goods_attr_items[{{$k}}][attr_value]" class="form-control">{{$attribute['value']}}</textarea>
                 @endif
 
                 <input type="hidden" name="goods_attr_items[{{$k}}][attr_name]" value="{{$attribute['attr_name']}}"/>

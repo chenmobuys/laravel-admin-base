@@ -28,14 +28,15 @@ class GoodsAttrItems extends Select
      */
     public function render()
     {
+        $name = $this->type == 'attr'?'attr_item_type_id':'attr_spec_type_id';
         $script = <<<EOT
-        $.get('/admin/goods/goods_attribute/attribute',{goods_id:"{$this->form->model()->id}",type:"{$this->type}"},function(res){
+        $.get('/admin/goods/goods_attribute/attribute',{goods_id:"{$this->form->model()->id}",type:"{$this->type}",type_id:"{$this->form->model()->$name}"},function(res){
             $('#attributes').html(res);
             $('.selects').select2();
         })
         
     $("select{$this->getElementClassSelector()}").change(function(){
-        $.get('/admin/goods/goods_attribute/attribute',{type_id:$(this).val(),goods_id:"{$this->form->model()->id}",type:$(this).data('type')},function(res){
+        $.get('/admin/goods/goods_attribute/attribute',{type_id:$(this).val(),goods_id:"{$this->form->model()->id}",type:"{$this->type}",mode:"new"},function(res){
             $('#attributes').html(res);
             $('.selects').select2();
         })

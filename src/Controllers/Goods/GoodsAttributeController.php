@@ -121,15 +121,22 @@ class GoodsAttributeController extends Controller
         $type_id = request('type_id');
         $type = request('type');
         $goods_id = request('goods_id');
+        $mode = request('mode');
         $attr_items = [];
-        if(!$type_id){
-            $attr_items = GoodsAttrItem::where('goods_id',$goods_id)->get()->toArray();
-        }
-
-        $attributes = GoodsAttribute::where('type_id',$type_id)->whereIn('type_id',[1,3])->orderBy('attr_type',SORT_ASC)->get()->toArray();
+        $attr_items = GoodsAttrItem::where('goods_id',$goods_id)->get()->toArray();
+        $attributes = GoodsAttribute::where('type_id',$type_id)->whereIn('attr_type',[1,3])->orderBy('attr_type',SORT_ASC)->get()->toArray();
 
         foreach ($attributes as $k => $v){
-            $attributes[$k]['value'] = $attr_items?$attr_items[$k]['attr_value']:'';
+            if($mode != 'new'){
+                if(isset($attr_items[$k]) && isset($attr_items[$k]['attr_value'])){
+                    $attributes[$k]['value'] = $attr_items?$attr_items[$k]['attr_value']:'';
+                }else{
+                    $attributes[$k]['value'] = '';
+                }
+            }else{
+                $attributes[$k]['value'] = '';
+            }
+
         }
 
         return view('chen::goods.goods_attribute.attribute',compact('type','attributes','goods_id'));

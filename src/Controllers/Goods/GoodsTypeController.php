@@ -23,8 +23,8 @@ class GoodsTypeController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header(trans('chen.goods_type'));
+            $content->description(trans('admin.list'));
 
             $content->body($this->grid());
         });
@@ -40,8 +40,8 @@ class GoodsTypeController extends Controller
     {
         return Admin::content(function (Content $content) use ($id) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header(trans('chen.goods_type'));
+            $content->description(trans('admin.edit'));
 
             $content->body($this->form()->edit($id));
         });
@@ -56,8 +56,8 @@ class GoodsTypeController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header(trans('chen.goods_type'));
+            $content->description(trans('admin.create'));
 
             $content->body($this->form());
         });

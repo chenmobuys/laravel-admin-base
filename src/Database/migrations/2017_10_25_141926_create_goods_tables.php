@@ -17,6 +17,8 @@ class CreateGoodsTables extends Migration
             $table->increments('id');
             $table->integer('cat_id')->default(0)->comment('分类ID');
             $table->integer('brand_id')->default(0)->comment('品牌ID');
+            $table->integer('attr_item_type_id')->default(0)->comment('商品类型-属性ID');
+            $table->integer('attr_spec_type_id')->default(0)->comment('商品类型-规格ID');
             $table->string('goods_name',100)->comment('商品名称');
             $table->string('goods_image',255)->nullable()->comment('商品图片');
             $table->text('goods_album')->nullable()->comment('商品相册');

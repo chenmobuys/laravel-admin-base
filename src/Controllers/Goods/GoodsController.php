@@ -3,6 +3,7 @@
 namespace Chenmobuys\AdminBase\Controllers\Goods;
 
 use Chenmobuys\AdminBase\Models\Goods;
+use Chenmobuys\AdminBase\Models\GoodsAttrItem;
 use Chenmobuys\AdminBase\Models\GoodsBrand;
 use Chenmobuys\AdminBase\Models\GoodsCategory;
 use Chenmobuys\AdminBase\Models\GoodsType;
@@ -28,8 +29,8 @@ class GoodsController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('Goods');
-            //$content->description('description');
+            $content->header(trans('chen.goods'));
+            $content->description(trans('admin.list'));
 
             $content->body($this->grid());
         });
@@ -45,8 +46,8 @@ class GoodsController extends Controller
     {
         return Admin::content(function (Content $content) use ($id) {
 
-            $content->header('Update');
-            //$content->description('description');
+            $content->header(trans('chen.goods'));
+            $content->description(trans('admin.edit'));
 
             $content->body($this->form()->edit($id));
         });
@@ -61,8 +62,8 @@ class GoodsController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('Create');
-            //$content->description('description');
+            $content->header(trans('chen.goods'));
+            $content->description(trans('admin.create'));
 
             $content->body($this->form());
         });
@@ -127,12 +128,13 @@ class GoodsController extends Controller
             })->tab('商品规格', function (Form $form) {
 
             })->tab('商品属性', function (Form $form) {
-//                $form->select('goods_type','商品类型')->options(GoodsType::all()->pluck('type_name','id'))
-//                    ->load('goods_attrs',env('API_DOMAIN').'/api/goods_attrs');
+               $form->goods_attr_items('attr_item_type_id','商品类型')->options(GoodsType::all()->pluck('type_name','id'));
+            });
 
-                //$form->selectOnChange('goods_attr_items')->options(GoodsType::all()->pluck('type_name','id'))
-                   // ->loadOnChange('goods_attr_items',env('API_DOMAIN').':8080'.'/api/goods_attrs');
-                //$form->multipleSelect('goods_attr_items')->options(GoodsType::all()->pluck('type_name','id'));
+            $form->saved(function(Form $form){
+                GoodsAttrItem::where('goods_id',$form->model()->id)->delete();
+                if($form->goods_attr_items)
+                    GoodsAttrItem::insert($form->goods_attr_items);
             });
 
         });

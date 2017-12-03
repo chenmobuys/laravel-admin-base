@@ -8,8 +8,9 @@ Route::group([
 ], function (Router $router) {
 
     $router->get('helpers/routes', 'Helper\RouteController@index');
-
     $router->resource('auth/logs', 'Auth\LogController', ['only' => ['index', 'destroy']]);
+
+    $router->get('goods/goods_attribute/attribute','Goods\GoodsAttributeController@getAttribute');
 
     //Goods Module
     $router->resource('goods/goods', 'Goods\GoodsController');

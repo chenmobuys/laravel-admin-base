@@ -22,8 +22,8 @@ class GoodsCategoryController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header(trans('chen.goods_category'));
+            $content->description(trans('admin.list'));
 
             $content->body($this->tree());
         });
@@ -39,8 +39,8 @@ class GoodsCategoryController extends Controller
     {
         return Admin::content(function (Content $content) use ($id) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header(trans('chen.goods_category'));
+            $content->description(trans('admin.edit'));
 
             $content->body($this->form()->edit($id));
         });
@@ -55,8 +55,8 @@ class GoodsCategoryController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header(trans('chen.goods_category'));
+            $content->description(trans('admin.create'));
 
             $content->body($this->form());
         });

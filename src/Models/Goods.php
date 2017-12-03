@@ -13,7 +13,7 @@ class Goods extends Model
 
     public function goods_attr_items()
     {
-        return $this->hasMany(GoodsAttrItem::class,'goods_id');
+        return $this->hasMany(GoodsAttrItem::class,'goods_id','id');
     }
 
     public function setGoodsAlbumAttribute($goods_album)

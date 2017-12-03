@@ -3,6 +3,7 @@
 namespace Chenmobuys\AdminBase\Controllers\Goods;
 
 use Chenmobuys\AdminBase\Models\GoodsAttribute;
+use Chenmobuys\AdminBase\Models\GoodsAttrItem;
 use Chenmobuys\AdminBase\Models\GoodsType;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -26,8 +27,8 @@ class GoodsAttributeController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('商品属性');
-            //$content->description('description');
+            $content->header(trans('chen.goods_attribute'));
+            $content->description(trans('admin.list'));
 
             $content->body($this->grid());
         });
@@ -43,8 +44,8 @@ class GoodsAttributeController extends Controller
     {
         return Admin::content(function (Content $content) use ($id) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header(trans('chen.goods_attribute'));
+            $content->description(trans('admin.edit'));
 
             $content->body($this->form()->edit($id));
         });
@@ -59,8 +60,8 @@ class GoodsAttributeController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header(trans('chen.goods_attribute'));
+            $content->description(trans('admin.create'));
 
             $content->body($this->form());
         });
@@ -106,12 +107,31 @@ class GoodsAttributeController extends Controller
 
             $form->select('type_id', '商品类型')->options(GoodsType::all()->pluck('type_name', 'id'));
             $form->text('attr_name', '属性名称');
-            $form->select('attr_type', '属性类型')->options(['关键属性', '销售属性', '次要属性']);
-            $form->select('attr_input_type', '输入类型')->options(['文本框', '选择框', '文本域']);
+            $form->select('attr_type', '属性类型')->options(config('const.attr_type'));
+            $form->select('attr_input_type', '输入类型')->options(config('const.attr_input_type'));
             $form->textarea('attr_values', '属性值');
 
             $form->display('created_at', '创建时间');
             $form->display('updated_at', '更新时间');
         });
+    }
+
+    public function getAttribute()
+    {
+        $type_id = request('type_id');
+        $type = request('type');
+        $goods_id = request('goods_id');
+        $attr_items = [];
+        if(!$type_id){
+            $attr_items = GoodsAttrItem::where('goods_id',$goods_id)->get()->toArray();
+        }
+
+        $attributes = GoodsAttribute::where('type_id',$type_id)->whereIn('type_id',[1,3])->orderBy('attr_type',SORT_ASC)->get()->toArray();
+
+        foreach ($attributes as $k => $v){
+            $attributes[$k]['value'] = $attr_items?$attr_items[$k]['attr_value']:'';
+        }
+
+        return view('chen::goods.goods_attribute.attribute',compact('type','attributes','goods_id'));
     }
 }

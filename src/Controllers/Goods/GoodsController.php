@@ -106,7 +106,7 @@ class GoodsController extends Controller
                     ->options(GoodsBrand::all()->pluck('brand_name', 'id'))->default(0);
                 $form->text('goods_name', '商品名称')->rules('required', ['required' => '商品名称不能为空']);
                 $form->image('goods_image', '商品图片')
-                    //->removable()->uniqueName()->move('images/goods/goods')
+                    ->removable()->uniqueName()->move('images/goods/goods')
                     ->rules('required', ['required' => '商品图片不能为空']);
                 $form->text('goods_number', '商品编号');
                 $form->text('goods_weight', '商品重量')->default(0)->rules('integer', ['integer' => '必须为整数']);

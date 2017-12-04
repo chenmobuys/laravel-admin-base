@@ -22,17 +22,16 @@ class GoodsAttrSpec extends Select
         $script = <<<EOT
         $.get('/admin/goods/goods_attribute/attr_spec',{type_id:"{$this->form->model()->$name}",goods_id:"{$this->form->model()->id}"},function(res){
             $('#spec').html(res);
-            $('.selects').select2();
         })
         
     $("select{$this->getElementClassSelector()}").change(function(){
         $.get('/admin/goods/goods_attribute/attr_spec',{type_id:$(this).val(),goods_id:"{$this->form->model()->id}",mode:"new"},function(res){
             $('#spec').html(res);
-            $('.selects').select2();
         })
     })
 EOT;
         Admin::script($script);
+        Admin::js(asset('/vendor/laravel-admin-base/spec.js'));
 
         return parent::render();
     }

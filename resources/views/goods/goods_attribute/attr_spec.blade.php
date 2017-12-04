@@ -7,7 +7,7 @@
         <div class="col-sm-8">
 
             @foreach($attribute['attr_values'] as $value)
-            <button type="button" class="btn btn-default" data-attr_id="{{$attribute['id']}}">{{$value}}</button>
+            <button type="button" onclick="createDeleteInput(this)" class="btn btn-spec btn-default" data-attr_id="{{$attribute['id']}}">{{$value}}</button>
             @endforeach
 
         </div>

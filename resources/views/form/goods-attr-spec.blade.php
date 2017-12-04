@@ -19,4 +19,5 @@
 
     </div>
 </div>
-<div id="item"></div>
+<div id="spec"></div>
+<div id="specInput"></div>

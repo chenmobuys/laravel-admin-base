@@ -116,13 +116,11 @@ class GoodsAttributeController extends Controller
         });
     }
 
-    public function getAttribute()
+    public function getAttrItem()
     {
         $type_id = request('type_id');
-        $type = request('type');
         $goods_id = request('goods_id');
         $mode = request('mode');
-        $attr_items = [];
         $attr_items = GoodsAttrItem::where('goods_id',$goods_id)->get()->toArray();
         $attributes = GoodsAttribute::where('type_id',$type_id)->whereIn('attr_type',[1,3])->orderBy('attr_type',SORT_ASC)->get()->toArray();
 
@@ -139,6 +137,22 @@ class GoodsAttributeController extends Controller
 
         }
 
-        return view('chen::goods.goods_attribute.attribute',compact('type','attributes','goods_id'));
+        return view('chen::goods.goods_attribute.attr_item',compact('attributes','goods_id'));
+    }
+
+    public function getAttrSpec()
+    {
+        $type_id = request('type_id');
+        $goods_id = request('goods_id');
+        $mode = request('mode');
+       // $attr_spec = GoodsAttrItem::where('goods_id',$goods_id)->get()->toArray();
+
+        $attributes = GoodsAttribute::where('type_id',$type_id)->where('attr_type',2)->orderBy('attr_type',SORT_ASC)->get()->toArray();
+
+        foreach ($attributes as $k => $v){
+            $attributes[$k]['attr_values'] = explode(PHP_EOL,$v['attr_values']);
+        }
+
+        return view('chen::goods.goods_attribute.attr_spec',compact('attributes','goods_id'));
     }
 }

@@ -19,4 +19,5 @@
  */
 use Encore\Admin\Form;
 
-Form::extend('goods_attr_items',\Chenmobuys\AdminBase\Extensions\Form\GoodsAttrItems::class);
+Form::extend('goods_attr_item',\Chenmobuys\AdminBase\Extensions\Form\GoodsAttrItem::class);
+Form::extend('goods_attr_spec',\Chenmobuys\AdminBase\Extensions\Form\GoodsAttrSpec::class);

@@ -125,10 +125,10 @@ class GoodsController extends Controller
 
             })->tab('商品相册', function (Form $form) {
                 $form->multipleImage('goods_album', '商品图片')->move('images/goods/album')->uniqueName()->removable();
-            })->tab('商品规格', function (Form $form) {
-
             })->tab('商品属性', function (Form $form) {
-               $form->goods_attr_items('attr_item_type_id','商品类型')->options(GoodsType::all()->pluck('type_name','id'));
+                $form->goods_attr_item('attr_item_type_id','商品类型')->options(GoodsType::all()->pluck('type_name','id'));
+            })->tab('商品规格', function (Form $form) {
+                $form->goods_attr_spec('attr_spec_type_id','商品类型')->options(GoodsType::all()->pluck('type_name','id'));
             });
 
             $form->saved(function(Form $form){

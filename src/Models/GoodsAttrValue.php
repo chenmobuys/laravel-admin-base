@@ -7,4 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class GoodsAttrValue extends Model
 {
     public $timestamps = false;
+
+    protected $fillable = ['attr_value'];
 }

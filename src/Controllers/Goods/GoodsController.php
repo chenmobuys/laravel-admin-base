@@ -3,7 +3,6 @@
 namespace Chenmobuys\AdminBase\Controllers\Goods;
 
 use Chenmobuys\AdminBase\Models\Goods;
-use Chenmobuys\AdminBase\Models\GoodsAttrItem;
 use Chenmobuys\AdminBase\Models\GoodsBrand;
 use Chenmobuys\AdminBase\Models\GoodsCategory;
 use Chenmobuys\AdminBase\Models\GoodsType;
@@ -13,8 +12,6 @@ use Encore\Admin\Facades\Admin;
 use Encore\Admin\Layout\Content;
 use Illuminate\Routing\Controller;
 use Encore\Admin\Controllers\ModelForm;
-
-
 
 class GoodsController extends Controller
 {
@@ -132,9 +129,7 @@ class GoodsController extends Controller
             });
 
             $form->saved(function(Form $form){
-                GoodsAttrItem::where('goods_id',$form->model()->id)->delete();
-                if($form->goods_attr_items)
-                    GoodsAttrItem::insert($form->goods_attr_items);
+                Goods::addAttrItemAndAttrSpec($form->goods_attr_items,$form->goods_attr_specs,$form->model()->id);
             });
 
         });

@@ -22,11 +22,13 @@ class GoodsAttrSpec extends Select
         $script = <<<EOT
         $.get('/admin/goods/goods_attribute/attr_spec',{type_id:"{$this->form->model()->$name}",goods_id:"{$this->form->model()->id}"},function(res){
             $('#spec').html(res);
+            ajaxGetSpecInputArr("{$this->form->model()->id}")
         })
         
     $("select{$this->getElementClassSelector()}").change(function(){
         $.get('/admin/goods/goods_attribute/attr_spec',{type_id:$(this).val(),goods_id:"{$this->form->model()->id}",mode:"new"},function(res){
             $('#spec').html(res);
+            $('#spec_input_tab').html('');
         })
     })
 EOT;

@@ -12,11 +12,6 @@ class GoodsAttribute extends Model
         return $this->hasMany(GoodsAttrValue::class,'attr_id','id');
     }
 
-    public function getAttrValuesAttribute($attr_value)
-    {
-        return implode(PHP_EOL,$attr_value);
-    }
-
     public function goods_type()
     {
         return $this->hasOne(GoodsType::class, 'id', 'type_id');

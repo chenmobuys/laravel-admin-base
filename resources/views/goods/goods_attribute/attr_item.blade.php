@@ -12,8 +12,8 @@
                 <select name="goods_attr_items[{{$k}}][attr_value]" class="form-control selects"
                         style="width: 100%;">
 
-                    @foreach(explode(PHP_EOL,$attribute['attr_values']) as $val)
-                        <option value="{{$attribute['id']}}" {{$attribute['value'] == $val?'selected':''}}>{{$val}}</option>
+                    @foreach($attribute['attr_values'] as $val)
+                        <option value="{{$attribute['id']}}" {{$attribute['value'] == $val['attr_value']?'selected':''}}>{{$val['attr_value']}}</option>
                     @endforeach
 
                 </select>
@@ -23,7 +23,6 @@
 
             <input type="hidden" name="goods_attr_items[{{$k}}][attr_name]" value="{{$attribute['attr_name']}}"/>
             <input type="hidden" name="goods_attr_items[{{$k}}][attr_id]" value="{{$attribute['id']}}"/>
-            <input type="hidden" name="goods_attr_items[{{$k}}][type_id]" value="{{$attribute['type_id']}}"/>
             <input type="hidden" name="goods_attr_items[{{$k}}][goods_id]" value="{{$goods_id}}"/>
         </div>
 

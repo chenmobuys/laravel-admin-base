@@ -20,4 +20,4 @@
     </div>
 </div>
 <div id="spec"></div>
-<div id="specInput"></div>
+<div id="spec_input_tab"></div>

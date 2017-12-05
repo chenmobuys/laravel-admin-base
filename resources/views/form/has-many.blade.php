@@ -69,7 +69,7 @@
         @endforeach
 
         <td>
-            <button type="button" class="btn btn-danger" data-value="{{$name}}[__index__]">删除</button>
+            <button type="button" class="btn btn-danger table-field-remove" data-name="{{$name}}[__index__][_remove_]">删除</button>
         </td>
     </tr>
     @foreach($attrs as $attr)

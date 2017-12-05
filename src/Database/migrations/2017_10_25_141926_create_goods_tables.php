@@ -91,20 +91,19 @@ class CreateGoodsTables extends Migration
             $table->increments('id');
             $table->integer('goods_id')->comment('商品ID');
             $table->integer('attr_id')->comment('属性ID');
-            $table->integer('attr_value_id')->comment('属性值ID');
+            $table->integer('attr_value')->comment('属性值');
             $table->string('attr_name')->comment('属性名称');
         });
 
         Schema::create('goods_attr_specs',function(Blueprint $table){
             $table->increments('id');
             $table->integer('goods_id')->comment('商品ID');
-            $table->integer('attr_id')->comment('属性ID');
-            $table->integer('attr_value_id')->comment('属性值ID');
-            $table->string('attr_name')->comment('属性名称');
+            $table->integer('attr_ids')->comment('属性ID');
+            $table->string('attr_names')->comment('属性名称');
 
             $table->decimal('spec_price')->default(0)->comment('规格价格');
             $table->integer('spec_count')->default(0)->comment('规格库存');
-            $table->string('sku')->nullable()->comment('SKU');
+            $table->string('spec_sku')->nullable()->comment('SKU');
         });
 
     }
@@ -123,5 +122,6 @@ class CreateGoodsTables extends Migration
         Schema::dropIfExists('goods_types');
         Schema::dropIfExists('goods_attributes');
         Schema::dropIfExists('goods_attr_items');
+        Schema::dropIfExists('goods_attr_specs');
     }
 }

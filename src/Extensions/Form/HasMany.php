@@ -43,6 +43,11 @@ class HasMany extends Field
 
         $('#create').click(function (event) {
             $('#table tbody').append($('#config-tpl').html().replace(/__index__/g, $('#table tbody tr').length + 1));
+            $('#table').on('click', '.table-field-remove', function(event) {
+                $(event.target).closest('tr').css('display','none')
+                var name = $(this).data('name')
+                $('input[name="'+name+'"]').val(1)
+            });
         });
 EOT;
         Admin::script($script);

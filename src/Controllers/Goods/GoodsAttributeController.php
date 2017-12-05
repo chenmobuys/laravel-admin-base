@@ -4,6 +4,8 @@ namespace Chenmobuys\AdminBase\Controllers\Goods;
 
 use Chenmobuys\AdminBase\Models\GoodsAttribute;
 use Chenmobuys\AdminBase\Models\GoodsAttrItem;
+use Chenmobuys\AdminBase\Models\GoodsAttrSpec;
+use Chenmobuys\AdminBase\Models\GoodsAttrValue;
 use Chenmobuys\AdminBase\Models\GoodsType;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -80,18 +82,10 @@ class GoodsAttributeController extends Controller
             $grid->id('ID')->sortable();
 
             $grid->column('attr_name', '属性名称');
-            $grid->column('attr_type', '属性类型')->display(function ($value) {
-                return $value;
-                //$type = [1 => '关键属性', 2 => '销售属性', 3 => '次要属性'];
-                //return $type[$attr_type];
-            });
+            $grid->column('attr_type', '属性类型');
             $grid->column('goods_type.type_name', '商品类型');
             $grid->created_at('创建时间');
             $grid->updated_at('更新时间');
-
-//            $grid->tools(function ($tools) {
-//                $tools->append(new ButtonGroupFilter('attr_type', ['关键属性', '销售属性', '次要属性']));
-//            });
         });
     }
 
@@ -110,7 +104,9 @@ class GoodsAttributeController extends Controller
             $form->text('attr_name', '属性名称');
             $form->select('attr_type', '属性类型')->options(config('const.attr_type'));
             $form->select('attr_input_type', '输入类型')->options(config('const.attr_input_type'));
-            $form->has_many('attr_values','属性值')->attrs(['attr_id','attr_value','id'])->hidden(['id','attr_id']);
+            $form->has_many('attr_values', '属性值')
+                ->attrs(['attr_id', 'attr_value', 'id'])
+                ->hidden(['id', 'attr_id']);
 
             $form->display('created_at', '创建时间');
             $form->display('updated_at', '更新时间');
@@ -123,7 +119,7 @@ class GoodsAttributeController extends Controller
         $goods_id = request('goods_id');
         $mode = request('mode');
         $attr_items = GoodsAttrItem::where('goods_id', $goods_id)->get()->toArray();
-        $attributes = GoodsAttribute::where('type_id', $type_id)->whereIn('attr_type', [1, 3])->orderBy('attr_type', SORT_ASC)->get()->toArray();
+        $attributes = GoodsAttribute::with('attr_values')->where('type_id', $type_id)->whereIn('attr_type', [1, 3])->orderBy('attr_type', SORT_ASC)->get()->toArray();
 
         foreach ($attributes as $k => $v) {
             if ($mode != 'new') {
@@ -137,7 +133,7 @@ class GoodsAttributeController extends Controller
             }
 
         }
-        session_write_close();
+
         return view('chen::goods.goods_attribute.attr_item', compact('attributes', 'goods_id'));
     }
 
@@ -146,21 +142,32 @@ class GoodsAttributeController extends Controller
         $type_id = request('type_id');
         $goods_id = request('goods_id');
         $mode = request('mode');
-        // $attr_spec = GoodsAttrItem::where('goods_id',$goods_id)->get()->toArray();
+        $attr_spec = GoodsAttrSpec::where('goods_id',$goods_id)->get()->toArray();
 
-        $attributes = GoodsAttribute::where('type_id', $type_id)->where('attr_type', 2)->orderBy('attr_type', SORT_ASC)->get()->toArray();
-
-        foreach ($attributes as $k => $v) {
-            $attributes[$k]['attr_values'] = explode(PHP_EOL, $v['attr_values']);
+        $keys = [];
+        foreach($attr_spec as $k => $v){
+            $keys = array_merge($keys,explode('_', $v['attr_ids']));
         }
+        $keys = array_values(array_unique($keys));
 
-        return view('chen::goods.goods_attribute.attr_spec', compact('attributes', 'goods_id'));
+        $attributes = GoodsAttribute::with('attr_values')->where('type_id', $type_id)->where('attr_type', 2)->orderBy('attr_type', SORT_ASC)->get()->toArray();
+
+
+        return view('chen::goods.goods_attribute.attr_spec', compact('attributes', 'goods_id','keys'));
     }
 
     public function postAttrSpecInput()
     {
         $spec_arr = request('spec_arr');
         $goods_id = request('goods_id');
+
+        if (!$spec_arr) return;
+        $spec = [];
+        if($goods_id){
+            $spec1 = GoodsAttrSpec::where('goods_id',$goods_id)->get()->toArray();
+            foreach ($spec1 as $k => $v)
+                $spec[$v['attr_ids']] = $v;
+        }
 
         //规格排序数组
         $spec_arr_sort = [];
@@ -173,11 +180,16 @@ class GoodsAttributeController extends Controller
         foreach ($spec_arr_sort as $k => $v) {
             $spec_arr_new[$k] = $spec_arr[$k];
         }
-        $colum_name = array_keys($spec_arr_new);
-        $spec_arr_new = combineDika($spec_arr_new);
-        print_r($spec_arr_new);
+        $attr_ids = array_keys($spec_arr_new);
+        $attributes = GoodsAttribute::all()->pluck('attr_name', 'id')->toArray();
+        $attr_values1 = GoodsAttrValue::all()->toArray();
+        $attr_values = [];
+        foreach ($attr_values1 as $k => $v) {
+            $attr_values[$v['id']] = $v;
+        }
 
+        $spec_arr = combineDika($spec_arr_new);
 
-        return view('chen::goods.goods_attribute.attr_spec_input');
+        return view('chen::goods.goods_attribute.attr_spec_input', compact('spec_arr', 'attr_ids', 'attributes', 'attr_values','goods_id','spec'));
     }
 }

@@ -1,6 +1,7 @@
 <?php
 namespace Chenmobuys\AdminBase\Database\seeds;
 
+use Chenmobuys\AdminBase\Models\GoodsAttrValue;
 use Chenmobuys\AdminBase\Models\GoodsCategory;
 use Chenmobuys\AdminBase\Models\GoodsBrand;
 use Chenmobuys\AdminBase\Models\GoodsBrandCategory;
@@ -43,5 +44,9 @@ class GoodsTableSeeder extends Seeder
         GoodsAttribute::truncate();
         $goodsAttribute = factory(GoodsAttribute::class)->times(35)->make();
         GoodsAttribute::insert($goodsAttribute->toArray());
+
+        GoodsAttrValue::truncate();
+        $goodsAttrValue = factory(GoodsAttrValue::class)->times(200)->make();
+        GoodsAttrValue::insert($goodsAttrValue->toArray());
     }
 }

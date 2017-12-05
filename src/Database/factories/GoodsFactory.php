@@ -62,7 +62,6 @@ $factory->define(Chenmobuys\AdminBase\Models\GoodsAttribute::class, function(Fak
     return [
         'type_id' => $faker->randomElement(\Chenmobuys\AdminBase\Models\GoodsType::all('id')->pluck('id')->toArray()),
         'attr_name' => $faker->text(10),
-        'attr_values' => $faker->text(10).PHP_EOL.$faker->text(10).PHP_EOL.$faker->text(10),
         'attr_type' => $faker->randomElement([1,2,3]),
         'attr_input_type' => $faker->randomElement([1,2,3]),
         'order' => 50,

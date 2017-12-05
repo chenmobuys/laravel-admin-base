@@ -7,9 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class GoodsAttribute extends Model
 {
 
-    public function getAttrValueAttribute($attr_value)
+    public function attr_values()
     {
-        return explode(PHP_EOL,$attr_value);
+        return $this->hasMany(GoodsAttrValue::class,'attr_id','id');
+    }
+
+    public function getAttrValuesAttribute($attr_value)
+    {
+        return implode(PHP_EOL,$attr_value);
     }
 
     public function goods_type()

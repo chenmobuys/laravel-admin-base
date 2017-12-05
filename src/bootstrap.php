@@ -21,3 +21,4 @@ use Encore\Admin\Form;
 
 Form::extend('goods_attr_item',\Chenmobuys\AdminBase\Extensions\Form\GoodsAttrItem::class);
 Form::extend('goods_attr_spec',\Chenmobuys\AdminBase\Extensions\Form\GoodsAttrSpec::class);
+Form::extend('has_many',\Chenmobuys\AdminBase\Extensions\Form\HasMany::class);

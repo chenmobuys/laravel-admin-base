@@ -12,6 +12,8 @@ Route::group([
 
     $router->get('goods/goods_attribute/attr_item','Goods\GoodsAttributeController@getAttrItem');
     $router->get('goods/goods_attribute/attr_spec','Goods\GoodsAttributeController@getAttrSpec');
+    $router->post('goods/goods_attribute/attr_spec_input','Goods\GoodsAttributeController@postAttrSpecInput');
+
 
     //Goods Module
     $router->resource('goods/goods', 'Goods\GoodsController');

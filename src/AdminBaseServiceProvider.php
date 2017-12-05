@@ -13,6 +13,7 @@ class AdminBaseServiceProvider extends ServiceProvider
     protected $commands = [
         'Chenmobuys\AdminBase\Console\InstallCommand',
         'Chenmobuys\AdminBase\Console\UninstallCommand',
+        'Chenmobuys\AdminBase\Console\FreshCommand',
     ];
 
     /**

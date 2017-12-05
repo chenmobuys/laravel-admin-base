@@ -75,20 +75,36 @@ class CreateGoodsTables extends Migration
             $table->increments('id');
             $table->integer('type_id')->comment('类型ID');
             $table->string('attr_name',100)->comment('属性名称');
-            $table->text('attr_values')->nullable()->comment('属性值');
             $table->tinyInteger('attr_type')->default(0)->comment('属性类型[0]重要属性[1]普通属性[2]次要属性');
             $table->tinyInteger('attr_input_type')->default(0)->comment('输入类型[0]文本框[1]选择框[2]文本域');
             $table->integer('order')->default(50)->comment('排序');
             $table->timestamps();
         });
 
+        Schema::create('goods_attr_values',function(Blueprint $table){
+            $table->increments('id');
+            $table->integer('attr_id')->comment('属性ID');
+            $table->string('attr_value')->comment('属性值');
+        });
+
         Schema::create('goods_attr_items',function(Blueprint $table){
             $table->increments('id');
             $table->integer('goods_id')->comment('商品ID');
-            $table->integer('type_id')->comment('商品类型ID');
             $table->integer('attr_id')->comment('属性ID');
+            $table->integer('attr_value_id')->comment('属性值ID');
             $table->string('attr_name')->comment('属性名称');
-            $table->string('attr_value')->comment('属性值');
+        });
+
+        Schema::create('goods_attr_specs',function(Blueprint $table){
+            $table->increments('id');
+            $table->integer('goods_id')->comment('商品ID');
+            $table->integer('attr_id')->comment('属性ID');
+            $table->integer('attr_value_id')->comment('属性值ID');
+            $table->string('attr_name')->comment('属性名称');
+
+            $table->decimal('spec_price')->default(0)->comment('规格价格');
+            $table->integer('spec_count')->default(0)->comment('规格库存');
+            $table->string('sku')->nullable()->comment('SKU');
         });
 
     }

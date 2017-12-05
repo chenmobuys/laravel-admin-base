@@ -80,7 +80,7 @@ class GoodsController extends Controller
 
             $grid->id('ID')->sortable();
 
-            $grid->column('goods_name', '商品名称')->editable();
+            $grid->column('goods_name', '商品名称');
             $grid->column('goods_category.cat_name', '商品分类');
 
             $grid->created_at('创建时间')->sortable();

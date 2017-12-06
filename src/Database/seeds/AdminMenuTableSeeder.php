@@ -289,9 +289,9 @@ class AdminMenuTableSeeder extends Seeder
             [
                 'parent_id' => 29,
                 'order'     => 30,
-                'title'     => '物流价格',
+                'title'     => '物流管理',
                 'icon'      => 'fa-bars',
-                'uri'       => 'ship/ship_price',
+                'uri'       => 'ship/ship',
             ],
             [
                 'parent_id' => 29,

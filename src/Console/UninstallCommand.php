@@ -53,6 +53,7 @@ class UninstallCommand extends Command
         $this->laravel['files']->deleteDirectory(config('admin.directory'));
         $this->laravel['files']->deleteDirectory(public_path('vendor/laravel-admin/'));
         $this->laravel['files']->delete(config_path('admin.php'));
+        $this->laravel['files']->delete(config_path('const.php'));
     }
 
 }

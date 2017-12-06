@@ -34,13 +34,11 @@ class InstallCommand extends Command
      */
     public function handle()
     {
-        //$this->call('vendor:publish',['--provider'=>'Encore\Admin\AdminServiceProvider']);
-        //$this->call('vendor:publish',['--provider'=>'Chenmobuys\AdminBase\AdminBaseServiceProvider']);
-        //$this->call('admin:install');
-
+        if (!is_file(config_path('admin.php'))){
+            $this->error('please run "php artisan chen:publish"');return;
+        }
         $this->call('migrate:fresh');
+        $this->call('admin:install');
         $this->call('db:seed', ['--class' => 'Chenmobuys\AdminBase\Database\seeds\DatabaseSeeder']);
     }
-
-
 }

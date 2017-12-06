@@ -2,9 +2,8 @@
 
 use Faker\Generator as Faker;
 
-$list = [];
 
-$factory->define(Chenmobuys\AdminBase\Models\GoodsCategory::class, function(Faker $faker) use ($list){
+$factory->define(Chenmobuys\AdminBase\Models\GoodsCategory::class, function(Faker $faker){
     return [
         'parent_id' => 0,
         'cat_name' => $faker->text(10),
@@ -15,7 +14,7 @@ $factory->define(Chenmobuys\AdminBase\Models\GoodsCategory::class, function(Fake
     ] ;
 });
 
-$factory->define(Chenmobuys\AdminBase\Models\GoodsBrand::class, function(Faker $faker) use ($list){
+$factory->define(Chenmobuys\AdminBase\Models\GoodsBrand::class, function(Faker $faker){
     return [
         'brand_name' => $faker->text(10),
         'brand_url' => $faker->url,
@@ -32,7 +31,7 @@ $factory->define(Chenmobuys\AdminBase\Models\GoodsBrandCategory::class, function
     ] ;
 });
 
-$factory->define(Chenmobuys\AdminBase\Models\Goods::class, function (Faker $faker) use ($list) {
+$factory->define(Chenmobuys\AdminBase\Models\Goods::class, function (Faker $faker) {
     return [
         'cat_id' => $faker->randomElement(\Chenmobuys\AdminBase\Models\GoodsCategory::all()->pluck('id')->toArray()),
         'brand_id' => $faker->randomElement(\Chenmobuys\AdminBase\Models\GoodsBrand::all()->pluck('id')->toArray()),
@@ -68,4 +67,36 @@ $factory->define(Chenmobuys\AdminBase\Models\GoodsAttribute::class, function(Fak
         'created_at' => $faker->dateTimeBetween('-2 days','-1 days'),
         'updated_at' => $faker->dateTimeBetween('-1 days','now'),
     ] ;
+});
+
+
+$factory->define(\Chenmobuys\AdminBase\Models\Order::class, function (Faker $faker) {
+    return [
+        'out_trade_no' => 123456,
+        'order_type' => 0,
+        'total_amount' => $faker->randomFloat(2,8,2),
+        'real_amount' => $faker->randomFloat(2,8,2),
+        'receiver' => $faker->lastName.' '.$faker->firstName,
+        'contact' => $faker->phoneNumber,
+        'address' => $faker->address,
+        'order_status' => $faker->randomElement([0,1,2]),
+        'created_at' => $faker->dateTimeBetween('-2 days','-1 days')
+    ];
+});
+
+$factory->define(\Chenmobuys\AdminBase\Models\OrderGoods::class, function(Faker $faker){
+
+    $goods = Db::table('goods')->orderByRaw('RAND()')->first();
+
+    return [
+        'order_id' => $faker->randomElement(\Chenmobuys\AdminBase\Models\Order::all()->pluck('id')->toArray()),
+        'goods_id' => $goods->id,
+        'goods_name' => $goods->goods_name,
+        'goods_number' => $goods->goods_number,
+        'goods_count' => $faker->randomNumber(),
+        'market_price' => $faker->randomFloat(2,8,2),
+        'real_price' => $faker->randomFloat(2,8,2),
+        'total_price' => $faker->randomFloat(2,8,2),
+        'created_at' => $faker->dateTimeBetween('-2 days','-1 days')
+    ];
 });

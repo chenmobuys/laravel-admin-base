@@ -187,35 +187,35 @@ class AdminMenuTableSeeder extends Seeder
                 'order'     => 16,
                 'title'     => '商品列表',
                 'icon'      => 'fa-bars',
-                'uri'       => '/goods/goods',
+                'uri'       => 'goods/goods',
             ],
             [
                 'parent_id' => 15,
                 'order'     => 17,
                 'title'     => '商品分类',
                 'icon'      => 'fa-sitemap',
-                'uri'       => '/goods/goods_category',
+                'uri'       => 'goods/goods_category',
             ],
             [
                 'parent_id' => 15,
                 'order'     => 18,
                 'title'     => '商品品牌',
                 'icon'      => 'fa-diamond',
-                'uri'       => '/goods/goods_brand',
+                'uri'       => 'goods/goods_brand',
             ],
             [
                 'parent_id' => 15,
                 'order'     => 19,
                 'title'     => '商品类型',
                 'icon'      => 'fa-cubes',
-                'uri'       => '/goods/goods_type',
+                'uri'       => 'goods/goods_type',
             ],
             [
                 'parent_id' => 15,
                 'order'     => 20,
                 'title'     => '商品属性',
                 'icon'      => 'fa-cube',
-                'uri'       => '/goods/goods_attribute',
+                'uri'       => 'goods/goods_attribute',
             ],
 
             //Order Module
@@ -231,28 +231,28 @@ class AdminMenuTableSeeder extends Seeder
                 'order'     => 22,
                 'title'     => '订单列表',
                 'icon'      => 'fa-bars',
-                'uri'       => '/order/order',
+                'uri'       => 'order/order',
             ],
             [
                 'parent_id' => 21,
                 'order'     => 23,
                 'title'     => '发货列表',
                 'icon'      => 'fa-bars',
-                'uri'       => '/order/delivery',
+                'uri'       => 'order/order_delivery',
             ],
             [
                 'parent_id' => 21,
                 'order'     => 24,
                 'title'     => '退货列表',
                 'icon'      => 'fa-bars',
-                'uri'       => '/order/return',
+                'uri'       => 'order/order_return',
             ],
             [
                 'parent_id' => 21,
                 'order'     => 25,
                 'title'     => '订单日志',
                 'icon'      => 'fa-history',
-                'uri'       => '/order/log',
+                'uri'       => 'order/order_log',
             ],
 
             //Promotion Module
@@ -268,14 +268,60 @@ class AdminMenuTableSeeder extends Seeder
                 'order'     => 27,
                 'title'     => '活动列表',
                 'icon'      => 'fa-bars',
-                'uri'       => '/promotion/promotion',
+                'uri'       => 'promo/promo',
             ],
             [
                 'parent_id' => 26,
                 'order'     => 28,
                 'title'     => '优惠券',
                 'icon'      => 'fa-send',
-                'uri'       => '/promotion/coupon',
+                'uri'       => 'promo/promo_coupon',
+            ],
+
+            //Ship Module
+            [
+                'parent_id' => 0,
+                'order'     => 29,
+                'title'     => '物流管理',
+                'icon'      => 'fa-bars',
+                'uri'       => '',
+            ],
+            [
+                'parent_id' => 29,
+                'order'     => 30,
+                'title'     => '物流价格',
+                'icon'      => 'fa-bars',
+                'uri'       => 'ship/ship_price',
+            ],
+            [
+                'parent_id' => 29,
+                'order'     => 31,
+                'title'     => '地区管理',
+                'icon'      => 'fa-bars',
+                'uri'       => 'ship/ship_area',
+            ],
+
+            //Posts Module
+            [
+                'parent_id' => 0,
+                'order'     => 32,
+                'title'     => '内容管理',
+                'icon'      => 'fa-bars',
+                'uri'       => '',
+            ],
+            [
+                'parent_id' => 32,
+                'order'     => 33,
+                'title'     => '内容分类',
+                'icon'      => 'fa-bars',
+                'uri'       => 'posts/posts_category',
+            ],
+            [
+                'parent_id' => 32,
+                'order'     => 34,
+                'title'     => '内容管理',
+                'icon'      => 'fa-bars',
+                'uri'       => 'posts/posts',
             ],
 
 

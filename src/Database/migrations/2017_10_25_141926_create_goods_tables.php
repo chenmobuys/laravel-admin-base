@@ -98,7 +98,7 @@ class CreateGoodsTables extends Migration
         Schema::create('goods_attr_specs',function(Blueprint $table){
             $table->increments('id');
             $table->integer('goods_id')->comment('商品ID');
-            $table->integer('attr_ids')->comment('属性ID');
+            $table->string('attr_ids')->comment('属性ID');
             $table->string('attr_names')->comment('属性名称');
 
             $table->decimal('spec_price')->default(0)->comment('规格价格');

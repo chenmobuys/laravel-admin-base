@@ -24,5 +24,20 @@ Route::group([
 
     //Order Module
     $router->resource('order/order','Order\OrderController');
+    $router->resource('order/order_delivery','Order\OrderDeliveryController');
+    $router->resource('order/order_return','Order\OrderReturnController');
+    $router->resource('order/order_log','Order\OrderLogController');
 
+    //Ship Module
+    $router->resource('ship/ship','Ship\ShipController');
+    $router->resource('ship/ship_price','Ship\ShipPriceController');
+    $router->resource('ship/ship_area','Ship\ShipAreaController');
+
+    //Promotion Module
+    $router->resource('promo/promo','Promo\PromoController');
+    $router->resource('promo/promo_coupon','Promo\PromoCouponController');
+
+    //Posts Module
+    $router->resource('posts/posts','Posts\PostsController');
+    $router->resource('posts/posts_category','Posts\PostsCategoryController');
 });

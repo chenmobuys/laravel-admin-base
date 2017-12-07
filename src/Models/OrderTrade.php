@@ -3,7 +3,7 @@ namespace Chenmobuys\AdminBase\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class OrderTrade extends Model
 {
 
     public function order_goods()

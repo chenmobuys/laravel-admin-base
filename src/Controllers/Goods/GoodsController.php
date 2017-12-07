@@ -10,7 +10,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Layout\Content;
-use Illuminate\Routing\Controller;
+use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\ModelForm;
 
 class GoodsController extends Controller

@@ -14,6 +14,7 @@ Route::group([
     $router->get('goods/goods_attribute/attr_spec','Goods\GoodsAttributeController@getAttrSpec');
     $router->post('goods/goods_attribute/attr_spec_input','Goods\GoodsAttributeController@postAttrSpecInput');
 
+    $router->post('api/upload/image','Api\UploadController@image');
 
     //Goods Module
     $router->resource('goods/goods', 'Goods\GoodsController');
@@ -23,18 +24,18 @@ Route::group([
     $router->resource('goods/goods_attribute', 'Goods\GoodsAttributeController');
 
     //Order Module
-    $router->resource('order/order','Order\OrderController');
+    $router->resource('order/order_trade','Order\OrderTradeController');
     $router->resource('order/order_delivery','Order\OrderDeliveryController');
     $router->resource('order/order_return','Order\OrderReturnController');
     $router->resource('order/order_log','Order\OrderLogController');
 
     //Ship Module
     $router->resource('ship/ship','Ship\ShipController');
+    $router->resource('ship/area','Ship\AreaController');
     $router->resource('ship/ship_price','Ship\ShipPriceController');
-    $router->resource('ship/ship_area','Ship\ShipAreaController');
 
     //Promotion Module
-    $router->resource('promo/promo','Promo\PromoController');
+    $router->resource('promo/promo_activity','Promo\PromoActivityController');
     $router->resource('promo/promo_coupon','Promo\PromoCouponController');
 
     //Posts Module

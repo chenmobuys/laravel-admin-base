@@ -35,7 +35,7 @@ class FreshCommand extends Command
     public function handle()
     {
         $this->call('migrate:fresh');
-        $this->call('db:seed');
+        $this->call('db:seed', ['--class' => 'Chenmobuys\AdminBase\Database\seeds\DatabaseSeeder']);
     }
 
 

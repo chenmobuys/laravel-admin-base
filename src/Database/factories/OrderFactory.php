@@ -4,7 +4,7 @@ use Faker\Generator as Faker;
 use Illuminate\Support\Facades\DB;
 /* @var Illuminate\Database\Eloquent\Factory $factory */
 
-$factory->define(\Chenmobuys\AdminBase\Models\Order::class, function (Faker $faker) {
+$factory->define(\Chenmobuys\AdminBase\Models\OrderTrade::class, function (Faker $faker) {
     return [
         'out_trade_no' => 123456,
         'order_type' => 0,
@@ -23,7 +23,7 @@ $factory->define(\Chenmobuys\AdminBase\Models\OrderGoods::class, function(Faker 
     $goods = Db::table('goods')->orderByRaw('RAND()')->first();
 
     return [
-        'order_id' => $faker->randomElement(\Chenmobuys\AdminBase\Models\Order::all()->pluck('id')->toArray()),
+        'order_id' => $faker->randomElement(\Chenmobuys\AdminBase\Models\OrderTrade::all()->pluck('id')->toArray()),
         'goods_id' => $goods->id,
         'goods_name' => $goods->goods_name,
         'goods_number' => $goods->goods_number,

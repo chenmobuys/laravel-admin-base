@@ -7,7 +7,7 @@ use Encore\Admin\Auth\Database\OperationLog;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
-use Illuminate\Routing\Controller;
+use App\Http\Controllers\Controller;
 
 class LogController extends Controller
 {

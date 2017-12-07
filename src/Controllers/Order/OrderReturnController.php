@@ -2,7 +2,7 @@
 
 namespace Chenmobuys\AdminBase\Controllers\Order;
 
-use Chenmobuys\AdminBase\Models\Order;
+use Chenmobuys\AdminBase\Models\OrderReturn;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Facades\Admin;
@@ -23,7 +23,7 @@ class OrderReturnController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header(trans('chen.order'));
+            $content->header(trans('chen.order_return'));
             $content->description(trans('admin.list'));
 
             $content->body($this->grid());
@@ -40,7 +40,7 @@ class OrderReturnController extends Controller
     {
         return Admin::content(function (Content $content) use ($id) {
 
-            $content->header(trans('chen.order'));
+            $content->header(trans('chen.order_return'));
             $content->description(trans('admin.edit'));
 
             $content->body($this->form()->edit($id));
@@ -56,7 +56,7 @@ class OrderReturnController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header(trans('chen.order'));
+            $content->header(trans('chen.order_return'));
             $content->description(trans('admin.create'));
 
             $content->body($this->form());
@@ -70,7 +70,7 @@ class OrderReturnController extends Controller
      */
     protected function grid()
     {
-        return Admin::grid(Order::class, function (Grid $grid) {
+        return Admin::grid(OrderReturn::class, function (Grid $grid) {
 
             $grid->id('ID')->sortable();
 
@@ -83,8 +83,10 @@ class OrderReturnController extends Controller
                 return $status[$order_status];
             });
 
-            $grid->created_at();
-            //$grid->updated_at();
+            $grid->created_at(trans('admin.created_at'));
+            $grid->updated_at(trans('admin.updated_at'));
+
+            $grid->disableCreation();
         });
     }
 
@@ -95,7 +97,7 @@ class OrderReturnController extends Controller
      */
     protected function form()
     {
-        return Admin::form(Order::class, function (Form $form) {
+        return Admin::form(OrderReturn::class, function (Form $form) {
 
             $form->display('id', 'ID');
 

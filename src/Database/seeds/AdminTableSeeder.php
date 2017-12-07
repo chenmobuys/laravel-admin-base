@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 use Encore\Admin\Auth\Database\Administrator;
 use Encore\Admin\Auth\Database\Role;
 
-class AdminMenuTableSeeder extends Seeder
+class AdminTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -231,7 +231,7 @@ class AdminMenuTableSeeder extends Seeder
                 'order'     => 22,
                 'title'     => '订单列表',
                 'icon'      => 'fa-bars',
-                'uri'       => 'order/order',
+                'uri'       => 'order/order_trade',
             ],
             [
                 'parent_id' => 21,
@@ -268,7 +268,7 @@ class AdminMenuTableSeeder extends Seeder
                 'order'     => 27,
                 'title'     => '活动列表',
                 'icon'      => 'fa-bars',
-                'uri'       => 'promo/promo',
+                'uri'       => 'promo/promo_activity',
             ],
             [
                 'parent_id' => 26,
@@ -298,7 +298,7 @@ class AdminMenuTableSeeder extends Seeder
                 'order'     => 31,
                 'title'     => '地区管理',
                 'icon'      => 'fa-bars',
-                'uri'       => 'ship/ship_area',
+                'uri'       => 'ship/area',
             ],
 
             //Posts Module

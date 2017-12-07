@@ -2,11 +2,11 @@
 
 namespace Chenmobuys\AdminBase\Controllers\Posts;
 
-use Chenmobuys\AdminBase\Models\GoodsCategory;
+use Chenmobuys\AdminBase\Models\PostsCategory;
 use Encore\Admin\Form;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Layout\Content;
-use Illuminate\Routing\Controller;
+use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\ModelForm;
 
 class PostsCategoryController extends Controller
@@ -22,7 +22,7 @@ class PostsCategoryController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header(trans('chen.goods_category'));
+            $content->header(trans('chen.posts_category'));
             $content->description(trans('admin.list'));
 
             $content->body($this->tree());
@@ -39,7 +39,7 @@ class PostsCategoryController extends Controller
     {
         return Admin::content(function (Content $content) use ($id) {
 
-            $content->header(trans('chen.goods_category'));
+            $content->header(trans('chen.posts_category'));
             $content->description(trans('admin.edit'));
 
             $content->body($this->form()->edit($id));
@@ -55,7 +55,7 @@ class PostsCategoryController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header(trans('chen.goods_category'));
+            $content->header(trans('chen.posts_category'));
             $content->description(trans('admin.create'));
 
             $content->body($this->form());
@@ -67,7 +67,7 @@ class PostsCategoryController extends Controller
      */
     protected function tree()
     {
-        return GoodsCategory::tree();
+        return PostsCategory::tree();
     }
 
     /**
@@ -77,10 +77,10 @@ class PostsCategoryController extends Controller
      */
     protected function form()
     {
-        return Admin::form(GoodsCategory::class, function (Form $form) {
+        return Admin::form(PostsCategory::class, function (Form $form) {
             $form->display('id', '分类ID');
 
-            $form->select('parent_id','父级分类')->options(GoodsCategory::selectOptions())->default(0);
+            $form->select('parent_id','父级分类')->options(PostsCategory::selectOptions())->default(0);
             $form->text('cat_name','分类名称')->rules('required');
             $form->image('cat_image','分类图片')->uniqueName()->move('images/goods/category')->removable();
             $form->textarea('cat_desc','分类描述');

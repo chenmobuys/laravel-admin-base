@@ -2,11 +2,12 @@
 
 namespace Chenmobuys\AdminBase\Controllers\Ship;
 
-use Chenmobuys\AdminBase\Models\GoodsCategory;
+use Chenmobuys\AdminBase\Models\PromoCoupon;
 use Encore\Admin\Form;
+use Encore\Admin\Grid;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Layout\Content;
-use Illuminate\Routing\Controller;
+use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\ModelForm;
 
 class ShipPriceController extends Controller
@@ -22,10 +23,10 @@ class ShipPriceController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header(trans('chen.goods_category'));
+            $content->header(trans('chen.coupon'));
             $content->description(trans('admin.list'));
 
-            $content->body($this->tree());
+            $content->body($this->grid());
         });
     }
 
@@ -39,7 +40,7 @@ class ShipPriceController extends Controller
     {
         return Admin::content(function (Content $content) use ($id) {
 
-            $content->header(trans('chen.goods_category'));
+            $content->header(trans('chen.coupon'));
             $content->description(trans('admin.edit'));
 
             $content->body($this->form()->edit($id));
@@ -55,7 +56,7 @@ class ShipPriceController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header(trans('chen.goods_category'));
+            $content->header(trans('chen.coupon'));
             $content->description(trans('admin.create'));
 
             $content->body($this->form());
@@ -63,11 +64,19 @@ class ShipPriceController extends Controller
     }
 
     /**
-     * @return \Encore\Admin\Tree
+     * Make a grid builder.
+     *
+     * @return Grid
      */
-    protected function tree()
+    protected function grid()
     {
-        return GoodsCategory::tree();
+        return Admin::grid(PromoCoupon::class, function (Grid $grid) {
+
+            $grid->id('ID')->sortable();
+
+            $grid->created_at(trans('admin.created_at'));
+            $grid->updated_at(trans('admin.updated_at'));
+        });
     }
 
     /**
@@ -77,15 +86,11 @@ class ShipPriceController extends Controller
      */
     protected function form()
     {
-        return Admin::form(GoodsCategory::class, function (Form $form) {
-            $form->display('id', '分类ID');
+        return Admin::form(PromoCoupon::class, function (Form $form) {
 
-            $form->select('parent_id','父级分类')->options(GoodsCategory::selectOptions())->default(0);
-            $form->text('cat_name','分类名称')->rules('required');
-            $form->image('cat_image','分类图片')->uniqueName()->move('images/goods/category')->removable();
-            $form->textarea('cat_desc','分类描述');
-
-            $form->display('order','分类排序')->default(50);
+            $form->display('id', 'ID');
+            $form->display('created_at', 'Created At');
+            $form->display('updated_at', 'Updated At');
         });
     }
 }

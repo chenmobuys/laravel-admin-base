@@ -2,7 +2,8 @@
 
 namespace Chenmobuys\AdminBase\Controllers\Posts;
 
-use Chenmobuys\AdminBase\Models\Order;
+use Chenmobuys\AdminBase\Models\Posts;
+use Chenmobuys\AdminBase\Models\PostsCategory;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Facades\Admin;
@@ -23,7 +24,7 @@ class PostsController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header(trans('chen.order'));
+            $content->header(trans('chen.posts'));
             $content->description(trans('admin.list'));
 
             $content->body($this->grid());
@@ -40,7 +41,7 @@ class PostsController extends Controller
     {
         return Admin::content(function (Content $content) use ($id) {
 
-            $content->header(trans('chen.order'));
+            $content->header(trans('chen.posts'));
             $content->description(trans('admin.edit'));
 
             $content->body($this->form()->edit($id));
@@ -56,7 +57,7 @@ class PostsController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header(trans('chen.order'));
+            $content->header(trans('chen.posts'));
             $content->description(trans('admin.create'));
 
             $content->body($this->form());
@@ -70,21 +71,21 @@ class PostsController extends Controller
      */
     protected function grid()
     {
-        return Admin::grid(Order::class, function (Grid $grid) {
+        return Admin::grid(Posts::class, function (Grid $grid) {
 
             $grid->id('ID')->sortable();
+            $grid->column('posts_title','文章标题');
+            $grid->column('category.cat_name','文章分类');
+            $grid->column('posts_author','文章作者');
+            $grid->column('posts_from','文章来源');
+            $grid->column('posts_summary','文章简介');
 
-            $grid->column('out_trade_no','订单号');
-            $grid->column('receiver','收货人');
-            $grid->column('contact','联系方式');
-            $grid->column('address','详细地址');
-            $grid->column('order_status','订单状态')->display(function($order_status){
-                $status = ['待付款','待发货','待收货','待评价'];
-                return $status[$order_status];
+            $grid->created_at(trans('admin.created_at'));
+            $grid->updated_at(trans('admin.updated_at'));
+
+            $grid->filter(function(Grid\Filter $filter){
+                $filter->equal('posts_title','文章标题');
             });
-
-            $grid->created_at();
-            //$grid->updated_at();
         });
     }
 
@@ -95,14 +96,22 @@ class PostsController extends Controller
      */
     protected function form()
     {
-        return Admin::form(Order::class, function (Form $form) {
+        return Admin::form(Posts::class, function (Form $form) {
 
             $form->display('id', 'ID');
 
-            $form->map('id','id','经纬度');
+            $form->select('cat_id','文章分类')->options(PostsCategory::selectOptions());
+            $form->text('posts_title','文章标题');
+            $form->text('posts_author','文章作者');
+            $form->text('posts_from','文章来源');
+            $form->text('friend_link','友情链接');
+            $form->textarea('posts_summary','文章简介');
+            $form->editor('posts_content','文章内容');
 
-            $form->display('created_at', 'Created At');
-            //$form->display('updated_at', 'Updated At');
+            $form->radio('show_status','显示状态')->options([1=>'显示',2=>'隐藏'])->value(1);
+
+            $form->display('created_at', trans('admin.created_at'));
+            $form->display('updated_at', trans('admin.updated_at'));
         });
     }
 }

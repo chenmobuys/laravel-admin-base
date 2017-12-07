@@ -29,9 +29,10 @@ class CreateOrderTables extends Migration
             $table->integer('street')->default(0)->comment('街道');
             $table->string('address')->nullable()->comment('收货地址');
 
-            $table->tinyInteger('order_status')->default(0)->comment('订单状态');
-            $table->tinyInteger('pay_status')->default(0)->comment('支付状态[0]待支付[1]已支付[2]退款中[3]已退款');
-            $table->tinyInteger('ship_status')->default(0)->comment('发货状态[0]待发货[1]已发货[2]待退货[2]退货中[3]已退货');
+            $table->tinyInteger('trade_status')->default(1)->comment('交易状态[1]待确认[2]已确认[3]已完成[4]已取消');
+            $table->tinyInteger('pay_status')->default(1)->comment('支付状态[1]待支付[2]已支付[3]退款中[4]已退款');
+            $table->tinyInteger('ship_status')->default(1)->comment('发货状态[1]待发货[2]已发货[3]已收货[4]待退货[5]退货中[6]已退货');
+            $table->tinyInteger('comment_status')->default(1)->comment('评价状态[1]待评价[2]已评价');
 
             $table->timestamp('created_at')->nullable()->comment('创建时间');
             $table->timestamp('paid_at')->nullable()->comment('支付时间');
@@ -51,18 +52,34 @@ class CreateOrderTables extends Migration
             $table->decimal('real_price')->default(0)->comment('实际单价');
             $table->decimal('total_price')->default(0)->comment('总价');
             $table->timestamp('created_at')->nullable()->comment('创建时间');
+
         });
 
         //发货订单
         Schema::create('order_deliveries',function(Blueprint $table){
             $table->increments('id');
             $table->string('out_trade_no',32)->comment('订单号');
+
+            $table->string('tracking_no',100)->comment('运单号');
         });
 
         //退货订单
+        Schema::create('order_returns',function(Blueprint $table){
+            $table->increments('id');
+            $table->string('out_trade_no',32)->comment('订单号');
+            $table->timestamps();
+        });
+
+        //退款订单
         Schema::create('order_refunds',function(Blueprint $table){
             $table->increments('id');
             $table->string('out_trade_no',32)->comment('订单号');
+            $table->timestamps();
+        });
+
+        //订单日志
+        Schema::create('order_logs',function(Blueprint $table){
+            $table->increments('id');
             $table->timestamps();
         });
     }
@@ -77,6 +94,8 @@ class CreateOrderTables extends Migration
         Schema::dropIfExists('order_trades');
         Schema::dropIfExists('order_goods');
         Schema::dropIfExists('order_deliveries');
+        Schema::dropIfExists('order_returns');
         Schema::dropIfExists('order_refunds');
+        Schema::dropIfExists('order_logs');
     }
 }

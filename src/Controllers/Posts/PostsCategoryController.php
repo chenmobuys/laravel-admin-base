@@ -80,12 +80,12 @@ class PostsCategoryController extends Controller
         return Admin::form(PostsCategory::class, function (Form $form) {
             $form->display('id', '分类ID');
 
-            $form->select('parent_id','父级分类')->options(PostsCategory::selectOptions())->default(0);
-            $form->text('cat_name','分类名称')->rules('required');
-            $form->image('cat_image','分类图片')->uniqueName()->move('images/goods/category')->removable();
-            $form->textarea('cat_desc','分类描述');
+            $form->select('parent_id', '父级分类')->options(PostsCategory::selectOptions())->default(0);
+            $form->text('cat_name', '分类名称')->rules('required');
+            $form->image('cat_image', '分类图片')->uniqueName()->move('images/goods/category')->removable();
+            $form->textarea('cat_desc', '分类描述');
 
-            $form->display('order','分类排序')->default(50);
+            $form->display('order', '分类排序')->default(50);
         });
     }
 }

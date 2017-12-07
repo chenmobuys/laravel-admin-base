@@ -15,6 +15,12 @@ class CreateShipTables extends Migration
     {
         Schema::create('ships',function(Blueprint $table){
             $table->increments('id');
+            $table->string('ship_name')->comment('物流名称');
+            $table->string('ship_slug')->comment('物流标识');
+            $table->string('ship_logo')->comment('物流logo');
+            $table->string('ship_image')->comment('物流快递单');
+            $table->tinyInteger('show_status')->comment('显示状态[1]显示[2]隐藏');
+            $table->timestamps();
         });
 
         Schema::create('areas',function(Blueprint $table){

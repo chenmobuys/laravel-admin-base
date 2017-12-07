@@ -2,7 +2,7 @@
 
 namespace Chenmobuys\AdminBase\Controllers\Ship;
 
-use Chenmobuys\AdminBase\Models\PromoCoupon;
+use Chenmobuys\AdminBase\Models\Ship;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Facades\Admin;
@@ -70,9 +70,15 @@ class ShipController extends Controller
      */
     protected function grid()
     {
-        return Admin::grid(PromoCoupon::class, function (Grid $grid) {
+        return Admin::grid(Ship::class, function (Grid $grid) {
 
             $grid->id('ID')->sortable();
+
+            $grid->column('ship_name','物流名称');
+            $grid->column('ship_slug','物流标识');
+            $grid->column('show_status','显示状态')->display(function($value){
+                return config('const.show_status.'.$value);
+            });
 
             $grid->created_at(trans('admin.created_at'));
             $grid->updated_at(trans('admin.updated_at'));
@@ -86,9 +92,16 @@ class ShipController extends Controller
      */
     protected function form()
     {
-        return Admin::form(PromoCoupon::class, function (Form $form) {
+        return Admin::form(Ship::class, function (Form $form) {
 
             $form->display('id', 'ID');
+
+            $form->text('ship_name', '物流名称');
+            $form->text('ship_slug', '快递标识');
+            $form->image('ship_logo', '物流logo');
+            $form->image('ship_image', '物流快递单');
+            $form->radio('show_status', '显示状态')->options(config('const.show_status'))->default(1);
+
             $form->display('created_at', 'Created At');
             $form->display('updated_at', 'Updated At');
         });

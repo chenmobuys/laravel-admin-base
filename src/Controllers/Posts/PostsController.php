@@ -108,7 +108,7 @@ class PostsController extends Controller
             $form->textarea('posts_summary','文章简介');
             $form->editor('posts_content','文章内容');
 
-            $form->radio('show_status','显示状态')->options([1=>'显示',2=>'隐藏'])->value(1);
+            $form->radio('show_status','显示状态')->options(config('const.show_status'))->default(1);
 
             $form->display('created_at', trans('admin.created_at'));
             $form->display('updated_at', trans('admin.updated_at'));

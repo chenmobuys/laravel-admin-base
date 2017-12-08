@@ -15,8 +15,8 @@ class CreatePostsTables extends Migration
     {
         Schema::create('posts',function(Blueprint $table){
             $table->increments('id');
-            $table->integer('cat_id','文章分类')->default(0);
-            $table->string('posts_title','文章标题');
+            $table->integer('cat_id')->default(0)->comment('文章分类');
+            $table->string('posts_title')->comment('文章标题');
             $table->string('posts_author')->comment('文章作者');
             $table->string('posts_from')->comment('文章来源');
             $table->string('posts_summary')->nullable()->comment('文章简介');

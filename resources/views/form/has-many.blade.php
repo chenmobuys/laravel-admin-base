@@ -17,7 +17,7 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($value as $k => $v)
+            @foreach($value?:[] as $k => $v)
                 <tr>
                     @foreach($attrs as $attr)
                         @if(!in_array($attr,$hidden))

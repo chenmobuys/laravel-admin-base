@@ -52,7 +52,7 @@ class HasMany extends Field
 EOT;
         Admin::script($script);
 
-        return parent::render()->with(['attrs'=>$this->attrs,'hidden'=>$this->hidden]);
+        return parent::render()->with(['attrs'=>$this->attrs?:[],'hidden'=>$this->hidden?:[]]);
     }
 
 }

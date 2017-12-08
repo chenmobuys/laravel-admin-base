@@ -187,7 +187,7 @@ class GoodsAttributeController extends Controller
             $attr_values[$v['id']] = $v;
         }
 
-        $spec_arr = combineDika($spec_arr_new);
+        $spec_arr = combine_dika($spec_arr_new);
 
         return view('chen::goods.goods_attribute.attr_spec_input', compact('spec_arr', 'attr_ids', 'attributes', 'attr_values','goods_id','spec'));
     }

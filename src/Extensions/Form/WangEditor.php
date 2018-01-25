@@ -26,7 +26,7 @@ var E = window.wangEditor
 var editor = new E('#{$this->id}');
 //editor.customConfig.uploadImgShowBase64 = true
 // 配置服务器端地址
-editor.customConfig.uploadImgServer = '/admin/api/upload/image?dst=editor&_method=POST&_token='+LA.token
+editor.customConfig.uploadImgServer = '/admin/api/upload/image?dst=editor&disk=qiniu&_method=POST&_token='+LA.token
 //editor.customConfig.uploadImgMaxLength = 10
 //editor.customConfig.uploadImgMaxSize = 3 * 1024 * 1024
 

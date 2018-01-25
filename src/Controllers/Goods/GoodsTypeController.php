@@ -91,9 +91,8 @@ class GoodsTypeController extends Controller
         return Admin::form(GoodsType::class, function (Form $form) {
 
             $form->display('id', 'ID');
-
-            $form->display('created_at', 'Created At');
-            $form->display('updated_at', 'Updated At');
+            $form->text('type_name','类型名称');
+            
         });
     }
 }

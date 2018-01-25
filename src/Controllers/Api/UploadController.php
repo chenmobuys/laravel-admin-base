@@ -19,12 +19,16 @@ class UploadController extends Controller
         $filenames = [];
         $dst = $request->get('dst') ?: 'default';
         $path = "/uploads/images/{$dst}/" . date('Y-m-d') . '/';
+
+        $disk = QiniuStorage::disk($request->get('disk','public'));
+
         foreach ($files as  $file) {
             $ext = $file->getClientOriginalExtension();
             $filename = md5(uniqid()) . '.' . $ext;
-            $file->move(public_path($path), $filename);
 
-            $filenames[] = $path . $filename;
+            $disk->put($path.$filename,file_get_contents($file->getRealPath()));
+
+            $filenames[] = $disk->imagePreviewUrl($path . $filename,'');
         }
 
         return new JsonResponse(['errno' => 0, '上传成功', 'data' => $filenames]);

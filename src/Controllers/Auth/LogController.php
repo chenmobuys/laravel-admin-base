@@ -50,7 +50,7 @@ class LogController extends Controller
                     $actions->disableEdit();
                 });
 
-                $grid->disableCreation();
+                $grid->disableCreateButton();
 
                 $grid->filter(function ($filter) {
                     $filter->equal('user_id', 'User')->select(Administrator::all()->pluck('name', 'id'));

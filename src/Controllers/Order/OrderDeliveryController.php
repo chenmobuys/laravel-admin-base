@@ -86,7 +86,7 @@ class OrderDeliveryController extends Controller
             $grid->created_at(trans('admin.created_at'));
             $grid->updated_at(trans('admin.updated_at'));
 
-            $grid->disableCreation();
+            $grid->disableCreateButton();
         });
     }
 
@@ -97,7 +97,7 @@ class OrderDeliveryController extends Controller
      */
     protected function form()
     {
-        return Admin::form(OrderTrade::class, function (Form $form) {
+        return Admin::form(OrderDelivery::class, function (Form $form) {
 
             $form->display('id', 'ID');
 

@@ -105,6 +105,7 @@ class PostsController extends Controller
             $form->text('posts_author','文章作者');
             $form->text('posts_from','文章来源');
             $form->text('friend_link','友情链接');
+            $form->image('posts_image','文章封面')->removable();
             $form->textarea('posts_summary','文章简介');
             $form->editor('posts_content','文章内容');
 

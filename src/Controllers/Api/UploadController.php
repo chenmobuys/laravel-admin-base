@@ -5,6 +5,7 @@ namespace Chenmobuys\AdminBase\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use zgldh\QiniuStorage\QiniuStorage;
 
 class UploadController extends Controller
 {

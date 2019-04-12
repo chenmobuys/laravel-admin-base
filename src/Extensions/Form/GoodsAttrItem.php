@@ -20,16 +20,27 @@ class GoodsAttrItem extends Select
     {
         $name = 'attr_item_type_id';
         $script = <<<EOT
-        $.get('/admin/goods/goods_attribute/attr_item',{type_id:"{$this->form->model()->$name}",goods_id:"{$this->form->model()->id}"},function(res){
-            $('#item').html(res);
-            $('.selects').select2();
-        })
-        
+        $.ajax({
+            url: '/admin/goods/goods_attribute/attr_item',
+            type: 'get',
+            async: false,
+            data: {type_id:"{$this->form->model()->$name}",goods_id:"{$this->form->model()->id}"},
+            success:function(res){
+                $('#item').html(res);
+                $('.selects').select2();
+            }
+        })  
     $("select{$this->getElementClassSelector()}").change(function(){
-        $.get('/admin/goods/goods_attribute/attr_item',{type_id:$(this).val(),goods_id:"{$this->form->model()->id}",mode:"new"},function(res){
-            $('#item').html(res);
-            $('.selects').select2();
-        })
+        $.ajax({
+            url: '/admin/goods/goods_attribute/attr_item',
+            type: 'get',
+            async: false,
+            data: {type_id:"{$this->form->model()->$name}",goods_id:"{$this->form->model()->id}"},
+            success:function(res){
+                $('#item').html(res);
+                $('.selects').select2();
+            }
+        })  
     })
 EOT;
         Admin::script($script);

@@ -71,11 +71,16 @@ function ajaxGetSpecInputArr(goods_id = 0)
 //异步获取规格文本框：步骤2
 function ajaxGetSpecInput(spec_arr,goods_id)
 {
-    $.post("/admin/goods/goods_attribute/attr_spec_input",{"spec_arr":spec_arr,goods_id:goods_id,_method:'POST',_token:LA.token},function(data){
-        console.log(data)
-        $("#spec_input_tab").html('')
-        $("#spec_input_tab").append(data);
-        hbdyg();  // 合并单元格
+    $.ajax({
+        url: '/admin/goods/goods_attribute/attr_spec_input',
+        type: 'post',
+        async: false,
+        data: {spec_arr:spec_arr,goods_id:goods_id,_method:'POST',_token:LA.token},
+        success: function(data){
+            $("#spec_input_tab").html('')
+            $("#spec_input_tab").append(data);
+            hbdyg();  // 合并单元格
+        }
     })
 }
 

@@ -33,7 +33,7 @@ class GoodsAttrSpec extends Select
     })
 EOT;
         Admin::script($script);
-        Admin::js(asset('/vendor/base/spec.js'));
+        Admin::js(asset('/vendor/chen/base/spec.js'));
 
         return parent::render();
     }

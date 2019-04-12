@@ -10,11 +10,11 @@ class WangEditor extends Field
     protected $view = 'chen::form.wang-editor';
 
     protected static $css = [
-        '/vendor/laravel-admin/wangEditor-3.0.11/release/wangEditor.min.css',
+        '/vendor/chen/wangEditor-3.0.11/release/wangEditor.min.css',
     ];
 
     protected static $js = [
-        '/vendor/laravel-admin/wangEditor-3.0.11/release/wangEditor.min.js',
+        '/vendor/chen/wangEditor-3.0.11/release/wangEditor.min.js',
     ];
 
     public function render()

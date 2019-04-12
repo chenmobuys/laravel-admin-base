@@ -35,9 +35,6 @@ class InstallCommand extends Command
     public function handle()
     {
         $this->call('admin:install');
-        $this->call('vendor:publish',['--provider'=>'Encore\Admin\AdminServiceProvider']);
-        $this->call('vendor:publish',['--provider'=>'Chenmobuys\AdminBase\AdminBaseServiceProvider']);
-        $this->call('migrate:fresh');
-        $this->call('db:seed', ['--class' => 'Chenmobuys\AdminBase\Database\seeds\DatabaseSeeder']);
+        $this->call('chen:fresh');
     }
 }

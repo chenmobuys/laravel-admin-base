@@ -34,7 +34,7 @@ class PublishCommand extends Command
      */
     public function handle()
     {
-        $this->call('vendor:publish', ['--provider' => \Encore\Admin\AdminServiceProvider:class]);
+        $this->call('vendor:publish', ['--provider' => \Encore\Admin\AdminServiceProvider::class]);
         $this->call('vendor:publish', ['--provider' => \Chenmobuys\AdminBase\AdminBaseServiceProvider::class]);
     }
 
